@@ -14,8 +14,8 @@
 2. 큰 변경 직전에는 커밋한다. 커밋이 세이브 포인트다.
 3. 변경을 마치면 사용자에게 **브라우저에서 `index.html` 을 열어 직접 확인**하라고 요청하고, 괜찮다는 답을 받은 뒤에 커밋한다. 커밋 메시지는 한국어 한 줄, "무엇을 왜" (예: `램프 색 선택 버튼: 따뜻함/차가움 두 단계`).
 4. PR 은 `git push -u origin <브랜치>` 뒤 `gh pr create --title "[분반] 이름: 기능" --body "..."` 로 만든다. 분반과 이름을 모르면 묻는다. 본문은 `.github/pull_request_template.md` 의 네 항목(무엇을·왜·어떻게 확인·화면)을 채운다.
-5. 원본 최신으로 맞추기: `git fetch upstream && git rebase upstream/main`. 작업 중 변경이 있으면 `git stash` → rebase → `git stash pop`. 충돌이 나면 충돌 난 부분을 사용자에게 보여 주고 어느 쪽을 남길지 같이 정한다.
-6. 하지 않는다: `main` 으로 push, `git push --force`, 묻지 않고 `git reset --hard`, 다른 사람 브랜치 수정, 토큰·키·이메일을 파일에 쓰기.
+5. 원본 최신으로 맞추기: `git fetch upstream && git rebase upstream/main`. 작업 중 변경이 있으면 `git stash` → rebase → `git stash pop`. 충돌이 나면 충돌 난 부분을 사용자에게 보여 주고 어느 쪽을 남길지 같이 정한다. rebase 뒤 이미 올린 브랜치를 다시 올릴 때만 `git push --force-with-lease origin <내 브랜치>` 를 쓴다.
+6. 하지 않는다: `main` 으로 push, `main` 이나 남의 브랜치에 force push, 묻지 않고 `git reset --hard`, 다른 사람 브랜치 수정, 토큰·키·이메일을 파일에 쓰기.
 
 ## 작업 순서
 

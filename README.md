@@ -62,7 +62,7 @@ git fetch upstream
 git rebase upstream/main
 ```
 
-충돌이 나면 쌤과 같이 봅니다. 작업 중인 변경이 있으면 `git stash` 로 잠깐 치웠다가 `git stash pop` 으로 되돌립니다.
+충돌이 나면 쌤과 같이 봅니다. 작업 중인 변경이 있으면 `git stash` 로 잠깐 치웠다가 `git stash pop` 으로 되돌립니다. rebase 로 역사가 바뀐 브랜치를 다시 올릴 때는 `git push --force-with-lease origin <내 브랜치>` 입니다 (내 브랜치에만).
 
 ## 배포
 
