@@ -1,0 +1,7 @@
+.env
+.env.*
+*.key
+*.pem
+.hermes/
+.DS_Store
+node_modules/

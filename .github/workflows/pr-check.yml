@@ -1,0 +1,26 @@
+# PR 이 열리거나 갱신될 때마다 돈다. 통과하면 PR 에 초록 체크가 붙는다.
+# 검사는 셋뿐이다: index.html 이 있는가, HTML 문서인가, 비밀값 패턴이 없는가.
+name: PR check
+
+on:
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: index.html 존재와 형식
+        run: |
+          test -f index.html || { echo "index.html 이 없습니다"; exit 1; }
+          head -c 200 index.html | grep -qi '<!DOCTYPE html>' || { echo "index.html 이 HTML 문서로 시작하지 않습니다"; exit 1; }
+          size=$(wc -c < index.html)
+          test "$size" -lt 2000000 || { echo "index.html 이 2MB 를 넘습니다 ($size bytes)"; exit 1; }
+          echo "OK: index.html ($size bytes)"
+      - name: 비밀값 패턴 검사
+        run: |
+          if grep -rIEn 'sk-[A-Za-z0-9]{16,}|ghp_[A-Za-z0-9]{20,}|xox[bp]-[A-Za-z0-9-]{10,}|AKIA[0-9A-Z]{16}' --exclude-dir=.git --exclude-dir=.github . ; then
+            echo "API 키처럼 보이는 문자열이 있습니다. 지우고 다시 올려 주세요."
+            exit 1
+          fi
+          echo "OK: 비밀값 패턴 없음"
