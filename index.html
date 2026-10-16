@@ -482,7 +482,7 @@
           <div class="hud-right">
             <span class="demo-badge" id="demoToggleBtn">자동 타이핑 중 ⏸</span>
             <div class="char-counter">
-              <span id="charCount">151</span> / 3,000
+              <span id="charCount">151</span> / 3,000 · <span id="lineCount">14</span>줄
             </div>
           </div>
         </div>
@@ -1085,6 +1085,7 @@
       const paperViewport = document.getElementById("paperViewport");
       const typeGuide = document.getElementById("typeGuide");
       const charCountEl = document.getElementById("charCount");
+      const lineCountEl = document.getElementById("lineCount");
 
       // T자 활자 타격 애니메이션
       function triggerStrike() {
@@ -1101,6 +1102,7 @@
 
         const totalLen = committedStr.length + (comp ? 1 : 0);
         charCountEl.textContent = totalLen.toLocaleString();
+        lineCountEl.textContent = (committedStr + comp).split("\n").length;
 
         requestAnimationFrame(() => {
           const viewportRect = paperViewport.getBoundingClientRect();
